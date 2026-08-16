@@ -3,7 +3,7 @@
 A lightweight, open-source Solana WebSocket listener built with Python. Monitor real-time transactions for a single token mint and dispatch instant alerts directly to Discord or Telegram.
 
 > 🚀 **NEED MULTI-WALLET TRACKING, JUPITER USD PRICING & AUTO-RETRY?**  
-> Check out **[OPSNode Alert Engine Ultimate Edition](https://ship.opsnode.net)** — features multi-channel broadcasting, `meta.err` failure filtering, 5,000-signature deduplication, and native Jupiter v3 USD valuation.
+> Check out **[OPSNode Alert Engine Ultimate Edition](https://ship.opsnode.link)** — features multi-channel broadcasting, `meta.err` failure filtering, 5,000-signature deduplication, and native Jupiter v3 USD valuation.
 
 ---
 
