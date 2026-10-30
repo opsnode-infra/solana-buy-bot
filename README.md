@@ -1,86 +1,51 @@
-# ⚡ Free Solana Alert Bot (Lite Edition)
+# OPSNode Alert Bot · Lite (free)
 
-A lightweight, open-source Solana WebSocket listener built with Python. Monitor real-time transactions for a single token mint and dispatch instant alerts directly to Discord or Telegram.
+A free, open-source **buy bot for Solana tokens**: every buy of your token posted to Telegram or Discord, with **exact amounts** (USD, SOL or USDC paid, tokens received).
 
-> 🚀 **NEED MULTI-WALLET TRACKING, JUPITER USD PRICING & AUTO-RETRY?**  
-> Check out **[OPSNode Alert Engine Ultimate Edition](https://ship.opsnode.link)** — features multi-channel broadcasting, `meta.err` failure filtering, 5,000-signature deduplication, and native Jupiter v3 USD valuation.
+```
+🟢 NEW BUY · $YOURTOKEN
 
----
+💵 $1,240.00 (8.400 SOL)
+🪙 2,100,000.00 YOURTOKEN
 
-## 🌟 Lite Edition vs Ultimate Edition
+Tx · Chart
+```
 
-| Feature | Lite Edition (Free) | Ultimate Edition (OPSNode) |
-| :--- | :---: | :---: |
-| **Monitored Tokens** | 1 Token Mint | **Unlimited Tokens & Wallets** |
-| **Notification Channels** | Discord OR Telegram | **Simultaneous Multi-Channel** |
-| **Price Valuation** | Raw Balance Delta | **Jupiter API v3 USD Valuation** |
-| **Error & Rejection Handling** | Basic | **`meta.err` & Deduplication Cache** |
-| **RPC Management** | Standard WS | **Rate-Limit Safe & Auto-Retry** |
+- Net balance change per wallet: amounts are never doubled, pools are never counted as buyers, fees excluded
+- Automatic reconnection, retries when the RPC is slow, no duplicate alerts
+- pump.fun, PumpSwap, Jupiter, Raydium CPMM / CLMM, Meteora, Orca Whirlpools
 
----
-
-## 🛠️ Quick Start
-
-### 1. Clone & Setup Environment
+## Quick start
 
 ```bash
-git clone [https://github.com/ton-username/free-solana-alert-bot.git](https://github.com/ton-username/free-solana-alert-bot.git)
-cd free-solana-alert-bot
 python -m venv venv
-
-# Linux / macOS
-source venv/bin/activate
-
-# Windows
-.\venv\Scripts\activate
-```
-
-### 2. Install Dependencies
-
-Create a `requirements.txt` file with the necessary libraries, then run:
-
-```bash
+venv\Scripts\activate            # Windows   (macOS / Linux: source venv/bin/activate)
 pip install -r requirements.txt
+copy .env.example .env           # Windows   (macOS / Linux: cp .env.example .env)
+# fill in .env, then:
+python lite.py
 ```
 
-### 3. Configuration
+Requirements: Python 3.10+, a private Solana RPC (free [Helius](https://dashboard.helius.dev) key), a Telegram bot (@BotFather) or a Discord webhook.
 
-Create a `.env` file from the example template:
+## Lite vs full version
 
-```bash
-cp .env.example .env
-```
+| | Lite (free) | **Buy Bot + Guardian** |
+| --- | --- | --- |
+| Buy alerts, exact amounts | ✓ | ✓ |
+| Telegram **or** Discord | ✓ | Telegram **and** Discord |
+| Your GIF / image on every buy, emoji tiers, whale tag | | ✓ |
+| Market cap, "New holder!", position change | | ✓ |
+| Sell alerts | | ✓ |
+| Admin commands in Telegram (/min, /pause, /watch...) | | ✓ |
+| **Guardian**: treasury moves, liquidity pulled, big sells, mint authority changes | | ✓ |
+| Daily report | | ✓ |
+| Catch-up of missed transactions after a disconnection | | ✓ |
+| No "OPSNode Lite" footer | | ✓ |
+| Docker, editable templates (EN / FR / ES) | | ✓ |
 
-Configure your platform secret credentials inside `.env`:
+**Get the full version: [ship.opsnode.link](https://ship.opsnode.link)**
 
-```ini
-DISCORD_WEBHOOK=[https://discord.com/api/webhooks/](https://discord.com/api/webhooks/)...
-TELEGRAM_BOT_TOKEN=YOUR_TELEGRAM_BOT_TOKEN
-TELEGRAM_CHAT_ID=YOUR_TELEGRAM_CHAT_ID
-```
+## License
 
-Set your target token and RPC provider in `config.json`:
-
-```json
-{
-  "rpc_ws": "wss://api.mainnet-beta.solana.com",
-  "rpc_http": "[https://api.mainnet-beta.solana.com](https://api.mainnet-beta.solana.com)",
-  "token_mint": "So11111111111111111111111111111111111111112",
-  "min_amount": 10.0,
-  "platform": "discord"
-}
-```
-
-### 4. Run the Bot
-
-Start the listener engine:
-
-```bash
-python run.py
-```
-
----
-
-## 📄 License
-
-This project is released under the MIT License. Built & maintained by [OPSNode](https://opsnode.link).
+MIT. Made by [Opsnode](https://ship.opsnode.link).
