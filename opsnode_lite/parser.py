@@ -39,13 +39,18 @@ class TradeEvent:
         return self.token_raw / (10 ** self.decimals)
 
     @property
+    def _had_dust_only(self) -> bool:
+        """A leftover fraction from an old trade (< 1 % of the new balance) is not a real position."""
+        return self.holding_before_raw * 100 < self.holding_after_raw
+
+    @property
     def is_new_holder(self) -> bool:
-        return self.kind == "buy" and self.holding_before_raw == 0 and self.holding_after_raw > 0
+        return self.kind == "buy" and self.holding_after_raw > 0 and (self.holding_before_raw == 0 or self._had_dust_only)
 
     @property
     def position_change_pct(self) -> Optional[float]:
         """+35.0 means the trader increased their position by 35 %. None for new holders."""
-        if self.holding_before_raw <= 0:
+        if self.holding_before_raw <= 0 or (self.kind == "buy" and self._had_dust_only):
             return None
         return (self.holding_after_raw - self.holding_before_raw) * 100 / self.holding_before_raw
 
