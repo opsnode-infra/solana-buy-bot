@@ -1,5 +1,5 @@
 """
-OPSNode Alert Bot · Lite edition (free, MIT)
+Opsnode Alert Bot · Lite edition (free, MIT)
 Posts every buy of one Solana token to Telegram or Discord, with exact amounts.
 
 Full version (Buy Bot + Guardian, Telegram admin commands, images, market cap, new holders,
@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 from opsnode_lite.parser import WSOL_MINT, detect_trades
 from opsnode_lite.rpc import Listener, RpcClient
 
-FOOTER = '⚡ <a href="https://ship.opsnode.link">OPSNode Lite</a>'
+FOOTER = '⚡ <a href="https://ship.opsnode.link">Opsnode Lite</a>'
 log = logging.getLogger("opsnode-lite")
 
 
@@ -114,7 +114,7 @@ class LiteBot:
 
     async def run(self) -> None:
         self.listener.set_subscriptions([("logs", self.mint)])
-        log.info("OPSNode Lite started · $%s · min $%.0f · %s", self.symbol, self.min_usd, self.platform)
+        log.info("Opsnode Lite started · $%s · min $%.0f · %s", self.symbol, self.min_usd, self.platform)
         await self.listener.run()
 
 
